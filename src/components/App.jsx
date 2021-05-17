@@ -15,7 +15,7 @@ function App() {
   });
 
   const [bgColor, setBgColor] = useState({
-    red: 100,
+    red: 255,
     green: 255,
     blue: 255,
     alpha: 1,
