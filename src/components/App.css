@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+.wrapper {
+  padding: 2rem;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  color: #2c3e50;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zoom {
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.zoom:hover {
+  transform: scale(1.05);
+}
+
+.fs-7 {
+  font-size: 1.2rem;
+}
+
+.fs-8 {
+  font-size: 0.8rem;
+}
+
+.scrolller {
+  overflow-x: auto;
+  white-space: nowrap;
+}
