@@ -176,9 +176,7 @@ function App() {
     });
     const json = res.json();
     json.then((res) => {
-      res
-        ? setImages([...images, { src: imageUrl }])
-        : alert("Something went wrong. Please try again.");
+      res ? setImages([...images, { src: imageUrl }]) : alert(res);
     });
   };
 
@@ -189,7 +187,7 @@ function App() {
     });
     const json = res.json();
     json.then((res) => {
-      res ? setImages([]) : alert("Something went wrong. Please try again.");
+      res ? setImages([]) : alert(res);
     });
   };
 
