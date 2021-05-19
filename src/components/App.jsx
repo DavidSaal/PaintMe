@@ -174,10 +174,15 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ src: imageUrl }),
     });
-    const json = res.json();
-    json.then((res) => {
-      res ? setImages([...images, { src: imageUrl }]) : alert(res);
-    });
+    if (res.status === 200) {
+      setImages([...images, { src: imageUrl }]);
+    } else {
+      res.status === 401 && alert("Error reading images.json");
+      res.status === 402 &&
+        alert("Server reached max limit, please delete images.");
+      res.status === 403 && alert("Error image src pattern.");
+      res.status === 404 && alert("Error writing images.json");
+    }
   };
 
   const deleteAll = async () => {
@@ -185,10 +190,11 @@ function App() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
-    const json = res.json();
-    json.then((res) => {
-      res ? setImages([]) : alert(res);
-    });
+    if (res.status === 200) {
+      setImages([]);
+    } else {
+      res.status === (405 || 406) && alert("Error deleting images.");
+    }
   };
 
   return (
