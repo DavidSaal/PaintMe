@@ -169,7 +169,7 @@ function App() {
   const saveImage = async () => {
     const canvas = canvasRef.current;
     var imageUrl = canvas.toDataURL();
-    const res = await fetch("https://paintmee.herokuapp.com/saveImage", {
+    const res = await fetch("https://paintmee.herokuapp.com", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ src: imageUrl }),
@@ -177,23 +177,22 @@ function App() {
     if (res.status === 200) {
       setImages([...images, { src: imageUrl }]);
     } else {
-      res.status === 401 && alert("Error reading images.json");
+      res.status === 401 && alert("Error reading from database.");
       res.status === 402 &&
         alert("Server reached max limit, please delete images.");
-      res.status === 403 && alert("Error image src pattern.");
-      res.status === 404 && alert("Error writing images.json");
+      res.status === 403 && alert("Error with image src pattern.");
+      res.status === 404 && alert("Error saving image to database.");
     }
   };
 
   const deleteAll = async () => {
-    const res = await fetch("https://paintmee.herokuapp.com/deleteAll", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const res = await fetch("https://paintmee.herokuapp.com", {
+      method: "DELETE",
     });
     if (res.status === 200) {
       setImages([]);
     } else {
-      res.status === (405 || 406) && alert("Error deleting images.");
+      res.status === 405 && alert("Error deleting images.");
     }
   };
 
