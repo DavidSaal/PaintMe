@@ -7,7 +7,10 @@ const ServerImages = (props) => {
       <div className="card-header text-center fs-2">Saved Images On Server</div>
       <div className="py-3 scrolller">
         {props.loader ? (
-          <Loader type="Oval" color="black" height={50} width={50} />
+          <div className="pt-4">
+            <Loader type="Oval" color="black" height={50} width={50} />
+            <p className="pt-2  ">Loading..</p>
+          </div>
         ) : props.images.length > 0 ? (
           props.images.map((image, index) => (
             <img
