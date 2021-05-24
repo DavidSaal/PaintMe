@@ -169,6 +169,7 @@ function App() {
   };
 
   const saveImage = async () => {
+    setLoader(true);
     const canvas = canvasRef.current;
     var imageUrl = canvas.toDataURL();
     const res = await fetch("https://paintmee.herokuapp.com", {
@@ -176,6 +177,7 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ src: imageUrl }),
     });
+    setLoader(false);
     if (res.status === 200) {
       setImages([...images, { src: imageUrl }]);
     } else {
@@ -188,9 +190,11 @@ function App() {
   };
 
   const deleteAll = async () => {
+    setLoader(true);
     const res = await fetch("https://paintmee.herokuapp.com", {
       method: "DELETE",
     });
+    setLoader(false);
     if (res.status === 200) {
       setImages([]);
     } else {
