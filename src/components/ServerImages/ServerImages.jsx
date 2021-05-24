@@ -8,7 +8,7 @@ const ServerImages = (props) => {
       <div className="py-3 scrolller">
         {props.loader ? (
           <Loader type="Oval" color="black" height={50} width={50} />
-        ) : props.images.length > 0 ? (
+        ) : (
           props.images.map((image, index) => (
             <img
               src={image.src}
@@ -19,8 +19,6 @@ const ServerImages = (props) => {
               className="border col-3 m-2 shadow-sm zoom"
             />
           ))
-        ) : (
-          <h6 className="fst-italic">(Empty List)</h6>
         )}
       </div>
       <div className="card border-0 border-top bg-light d-inline py-1 rounded-0 rounded-bottom">
