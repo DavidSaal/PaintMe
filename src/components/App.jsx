@@ -8,7 +8,7 @@ import Container from "./Container";
 
 function App() {
   const [brushColor, setBrushColor] = useState({
-    red: 0,
+    red: 255,
     green: 0,
     blue: 0,
     alpha: 1,
