@@ -1,11 +1,15 @@
 import React from "react";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 const ServerImages = (props) => {
   return (
     <div className="card shadow-sm rounded-0 rounded-bottom">
       <div className="card-header text-center fs-2">Saved Images On Server</div>
       <div className="py-3 scrolller">
-        {props.images.length > 0 ? (
+        {props.loader ? (
+          <Loader type="Oval" color="black" height={50} width={50} />
+        ) : props.images.length > 0 ? (
           props.images.map((image, index) => (
             <img
               src={image.src}

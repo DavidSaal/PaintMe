@@ -40,6 +40,7 @@ function App() {
   const [fileName, setFileName] = useState("");
   const [images, setImages] = useState([]);
   const [expandCanvas, setExpandCanvas] = useState(false);
+  const [loader, setLoader] = useState(true);
 
   const [isDrawing, setIsDrawing] = useState(false);
   const canvasRef = useRef(null);
@@ -63,6 +64,7 @@ function App() {
   useEffect(() => {
     prepareCanvas();
     fetchData().then((images) => {
+      setLoader(false);
       setImages(images);
     });
   }, []);
@@ -237,6 +239,7 @@ function App() {
               deleteAll={deleteAll}
               images={images}
               loadImage={loadImage}
+              loader={loader}
             />
           </div>
           <div className="col">
