@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "./App.css";
 import Canvas from "./Canvas";
 import ServerImages from "./ServerImages";
@@ -45,9 +45,27 @@ function App() {
   const [isDrawing, setIsDrawing] = useState(false);
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
+  const inputRef = useRef(null);
+
+  const resizeHandler = (_) => {
+    const canvas = canvasRef.current;
+    canvas.width = inputRef.current.getBoundingClientRect().width - 25;
+  };
+  useEffect(() => {
+    window.addEventListener("resize", resizeHandler, true);
+    return () => {
+      window.removeEventListener("resize", resizeHandler, true);
+    };
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    canvas.width = inputRef.current.getBoundingClientRect().width - 25;
+  }, [expandCanvas]);
 
   const prepareCanvas = () => {
     const canvas = canvasRef.current;
+    canvas.width = inputRef.current.getBoundingClientRect().width - 25;
     const context = canvas.getContext("2d");
     context.lineCap = "round";
     context.strokeStyle = rgbBrushColor;
@@ -203,21 +221,21 @@ function App() {
   };
 
   return (
-    <div className="wrapper">
-      <Header
-        brushSize={brushSize}
-        setBrushSize={setBrushSize}
-        offset={offset}
-        saveImage={saveImage}
-        deleteAll={deleteAll}
-        images={images}
-        loadImage={loadImage}
-        expandCanvas={expandCanvas}
-        setExpandCanvas={setExpandCanvas}
-      />
-      <div className="center pt-4">
-        <div className={expandCanvas ? "row col-12" : "row col-9"}>
-          <div className="col">
+    <div className="wrapper pt-4">
+      <div className={expandCanvas ? "col-11 col-lg-11" : "col-10"}>
+        <Header
+          brushSize={brushSize}
+          setBrushSize={setBrushSize}
+          offset={offset}
+          saveImage={saveImage}
+          deleteAll={deleteAll}
+          images={images}
+          loadImage={loadImage}
+          expandCanvas={expandCanvas}
+          setExpandCanvas={setExpandCanvas}
+        />
+        <div className="row pt-4">
+          <div className="col pb-5 pb-xl-0" id="colorPicker1">
             <ColorPicker
               title="Brush Color"
               color={brushColor}
@@ -225,13 +243,20 @@ function App() {
               rgbColor={rgbBrushColor}
             />
           </div>
-          <div className="col">
+          <div
+            ref={inputRef}
+            className={
+              expandCanvas
+                ? "col-12 col-lg-6 col-xl-7 pb-4 pb-lg-0"
+                : "col-12 col-lg-5 col-xl-6 pb-4 pb-lg-0"
+            }
+            id="canvas"
+          >
             <Canvas
               startDrawing={startDrawing}
               finishDrawing={finishDrawing}
               draw={draw}
               canvasRef={canvasRef}
-              expandCanvas={expandCanvas}
             />
             <Container
               fileName={fileName}
@@ -246,7 +271,7 @@ function App() {
               loader={loader}
             />
           </div>
-          <div className="col">
+          <div className="col pb-5 pb-xl-0" id="colorPicker2">
             <ColorPicker
               title="Background Color"
               color={bgColor}

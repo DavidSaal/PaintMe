@@ -2,7 +2,7 @@ import React from "react";
 
 const LoadImage = (props) => {
   return (
-    <div className="col-4">
+    <div className="col-10 col-lg-4">
       <label
         htmlFor="file-upload"
         className="btn btn-outline-dark shadow-sm fs-5 col-12"
