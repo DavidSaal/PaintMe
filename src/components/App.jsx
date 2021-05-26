@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Canvas from "./Canvas";
 import ServerImages from "./ServerImages";
@@ -75,8 +75,8 @@ function App() {
 
   const fetchData = async () => {
     const res = await fetch("https://paintmee.herokuapp.com");
-    const json = res.json();
-    return json;
+    const images = await res.json();
+    return images;
   };
 
   useEffect(() => {
@@ -195,15 +195,34 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ src: imageUrl }),
     });
-    setLoader(false);
     if (res.status === 200) {
-      setImages([...images, { src: imageUrl }]);
+      fetchData().then((images) => {
+        setLoader(false);
+        setImages(images);
+      });
     } else {
       res.status === 401 && alert("Error reading from database.");
       res.status === 402 &&
         alert("Server reached max limit, please delete images.");
       res.status === 403 && alert("Error with image src pattern.");
       res.status === 404 && alert("Error saving image to database.");
+    }
+  };
+
+  const deleteImage = async (event) => {
+    setLoader(true);
+    const res = await fetch("https://paintmee.herokuapp.com/deleteImage", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: event.id }),
+    });
+    if (res.status === 200) {
+      fetchData().then((images) => {
+        setLoader(false);
+        setImages(images);
+      });
+    } else {
+      res.status === 405 && alert("Error deleting images.");
     }
   };
 
@@ -268,6 +287,7 @@ function App() {
               deleteAll={deleteAll}
               images={images}
               loadImage={loadImage}
+              deleteImage={deleteImage}
               loader={loader}
             />
           </div>

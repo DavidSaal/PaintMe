@@ -42,3 +42,9 @@
     order: 3;
   }
 }
+
+.check {
+  bottom: 3rem;
+  left: 0.5rem;
+  position: relative;
+}

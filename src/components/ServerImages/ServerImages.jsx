@@ -12,15 +12,22 @@ const ServerImages = (props) => {
             <p className="pt-2">Loading..</p>
           </div>
         ) : props.images.length > 0 ? (
-          props.images.map((image, index) => (
-            <img
-              src={image.src}
-              key={index}
-              id={index}
-              alt=""
-              onClick={props.loadImage}
-              className="border m-3 col-7 col-sm-5 col-md-4 col-lg-6 col-xl-3 my-2 shadow-sm zoom"
-            />
+          props.images.map((image) => (
+            <div className="position-relative d-inline" key={image._id}>
+              <button
+                type="button"
+                className="btn-close fs-8 check p-0"
+                aria-label="Close"
+                id={image._id}
+                onClick={props.deleteImage}
+              ></button>
+              <img
+                src={image.src}
+                alt=""
+                onClick={props.loadImage}
+                className="border m-3 col-7 col-sm-5 col-md-4 col-lg-6 col-xl-3 my-2 shadow-sm zoom"
+              />
+            </div>
           ))
         ) : (
           <h6 className="fst-italic">(Empty List)</h6>
