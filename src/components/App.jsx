@@ -214,7 +214,7 @@ function App() {
     const res = await fetch("https://paintmee.herokuapp.com/deleteImage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: event.id }),
+      body: JSON.stringify({ id: event.target.id }),
     });
     if (res.status === 200) {
       fetchData().then((images) => {
