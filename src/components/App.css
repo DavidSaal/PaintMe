@@ -1,4 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+
+@media (max-width: 990px) {
+  #canvas {
+    display: block;
+    order: 1;
+  }
+  #colorPicker1 {
+    display: block;
+    order: 2;
+  }
+  #colorPicker2 {
+    display: block;
+    order: 3;
+  }
+}
+
 .wrapper {
   text-align: center;
   font-family: "Raleway", sans-serif;
@@ -28,23 +44,12 @@
   white-space: nowrap;
 }
 
-@media (max-width: 990px) {
-  #canvas {
-    display: block;
-    order: 1;
-  }
-  #colorPicker1 {
-    display: block;
-    order: 2;
-  }
-  #colorPicker2 {
-    display: block;
-    order: 3;
-  }
-}
-
 .check {
   bottom: 3rem;
   left: 0.5rem;
   position: relative;
+}
+
+img {
+  height: 9rem;
 }
