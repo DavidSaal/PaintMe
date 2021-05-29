@@ -15,7 +15,7 @@ const Header = (props) => {
         <span></span>
         <span></span>
       </div>
-      <div>
+      <div className="me-5">
         <h1 className="display-1 d-inline">Paint</h1>
         <h1 className="display-1 text-primary d-inline">Me</h1>
         <img
