@@ -1,6 +1,7 @@
 import React from "react";
 import BrushSize from "../BrushSize";
 import "./Header.css";
+import logo from "./logo.png";
 
 const Header = (props) => {
   return (
@@ -14,7 +15,15 @@ const Header = (props) => {
         <span></span>
         <span></span>
       </div>
-      <h1 className="display-1">PaintMe</h1>
+      <div>
+        <h1 className="display-1 d-inline">PaintMe</h1>
+        <img
+          src={logo}
+          alt="Logo"
+          className="position-absolute ps-2 mt-2"
+          Style="width:60px; height:70px"
+        />
+      </div>
       <div className="row">
         <div className="col-12 col-md">
           <p className="fs-7 d-inline">Pos: </p>

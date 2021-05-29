@@ -2,12 +2,12 @@ import React from "react";
 
 const LoadImage = (props) => {
   return (
-    <div className="col-10 col-lg-4">
+    <div className="col-10 col-lg-5">
       <label
         htmlFor="file-upload"
         className="btn btn-outline-dark shadow-sm fs-5 col-12"
       >
-        <i className="fa fa-cloud-upload"></i> Choose File
+        Choose Background <i className="fa fa-cloud-upload fa-1x ms-1"></i>
       </label>
       <input
         id="file-upload"

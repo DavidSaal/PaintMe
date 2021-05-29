@@ -195,9 +195,9 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ src: imageUrl }),
     });
-    const id = await res.json();
+    const savedImage = await res.json();
     if (res.status === 200) {
-      setImages([...images, { src: imageUrl, id: id }]);
+      setImages([...images, savedImage]);
     } else {
       res.status === 401 && alert("Error reading from database.");
       res.status === 402 &&
