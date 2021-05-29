@@ -1,7 +1,7 @@
 import React from "react";
 import BrushSize from "../BrushSize";
 import "./Header.css";
-import logo from "./logo.png";
+import logo from "../../images/logo.png";
 
 const Header = (props) => {
   return (
@@ -20,8 +20,8 @@ const Header = (props) => {
         <img
           src={logo}
           alt="Logo"
-          className="position-absolute ps-2 mt-2"
-          Style="width:60px; height:70px"
+          className="position-absolute ps-2 mt-3"
+          Style="width:70px; height:60px"
         />
       </div>
       <div className="row">
