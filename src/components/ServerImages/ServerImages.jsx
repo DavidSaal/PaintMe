@@ -23,6 +23,7 @@ const ServerImages = (props) => {
               ></button>
               <img
                 src={image.src}
+                id={image._id}
                 alt=""
                 onClick={props.loadImage}
                 className="border m-3 col-7 col-sm-5 col-md-4 col-lg-6 col-xl-3 my-2 shadow-sm zoom"

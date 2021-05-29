@@ -195,11 +195,9 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ src: imageUrl }),
     });
+    const id = await res.json();
     if (res.status === 200) {
-      fetchData().then((images) => {
-        setLoader(false);
-        setImages(images);
-      });
+      setImages([...images, { src: imageUrl, id: id }]);
     } else {
       res.status === 401 && alert("Error reading from database.");
       res.status === 402 &&
@@ -207,6 +205,7 @@ function App() {
       res.status === 403 && alert("Error with image src pattern.");
       res.status === 404 && alert("Error saving image to database.");
     }
+    setLoader(false);
   };
 
   const deleteImage = async (event) => {
@@ -217,13 +216,11 @@ function App() {
       body: JSON.stringify({ id: event.target.id }),
     });
     if (res.status === 200) {
-      fetchData().then((images) => {
-        setLoader(false);
-        setImages(images);
-      });
+      setImages(images.filter((image) => image._id !== event.target.id));
     } else {
       res.status === 405 && alert("Error deleting images.");
     }
+    setLoader(false);
   };
 
   const deleteAll = async () => {
@@ -231,12 +228,12 @@ function App() {
     const res = await fetch("https://paintmee.herokuapp.com", {
       method: "DELETE",
     });
-    setLoader(false);
     if (res.status === 200) {
       setImages([]);
     } else {
       res.status === 405 && alert("Error deleting images.");
     }
+    setLoader(false);
   };
 
   return (
