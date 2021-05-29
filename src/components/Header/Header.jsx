@@ -16,7 +16,8 @@ const Header = (props) => {
         <span></span>
       </div>
       <div>
-        <h1 className="display-1 d-inline">PaintMe</h1>
+        <h1 className="display-1 d-inline">Paint</h1>
+        <h1 className="display-1 text-primary d-inline">Me</h1>
         <img
           src={logo}
           alt="Logo"
