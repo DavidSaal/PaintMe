@@ -82,7 +82,7 @@ function App() {
   useEffect(() => {
     prepareCanvas();
     fetchData().then((images) => {
-      //setLoading(false);
+      setLoading(false);
       setImages(images);
     });
   }, []);

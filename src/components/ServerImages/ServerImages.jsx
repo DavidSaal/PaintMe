@@ -9,7 +9,7 @@ const ServerImages = (props) => {
         {props.loading ? (
           <div>
             <Skeleton
-              className="border m-3 shadow-sm"
+              className="border shadow-s m-3"
               count={3}
               height={140}
               width={210}
