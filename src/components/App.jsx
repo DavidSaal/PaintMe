@@ -40,7 +40,7 @@ function App() {
   const [fileName, setFileName] = useState("");
   const [images, setImages] = useState([]);
   const [expandCanvas, setExpandCanvas] = useState(false);
-  const [loader, setLoader] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const [isDrawing, setIsDrawing] = useState(false);
   const canvasRef = useRef(null);
@@ -82,7 +82,7 @@ function App() {
   useEffect(() => {
     prepareCanvas();
     fetchData().then((images) => {
-      setLoader(false);
+      //setLoading(false);
       setImages(images);
     });
   }, []);
@@ -187,7 +187,7 @@ function App() {
   };
 
   const saveImage = async () => {
-    setLoader(true);
+    setLoading(true);
     const canvas = canvasRef.current;
     var imageUrl = canvas.toDataURL();
     const res = await fetch("https://paintmee.herokuapp.com", {
@@ -205,11 +205,11 @@ function App() {
       res.status === 403 && alert("Error with image src pattern.");
       res.status === 404 && alert("Error saving image to database.");
     }
-    setLoader(false);
+    setLoading(false);
   };
 
   const deleteImage = async (event) => {
-    setLoader(true);
+    setLoading(true);
     const res = await fetch("https://paintmee.herokuapp.com/deleteImage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -220,11 +220,11 @@ function App() {
     } else {
       res.status === 405 && alert("Error deleting images.");
     }
-    setLoader(false);
+    setLoading(false);
   };
 
   const deleteAll = async () => {
-    setLoader(true);
+    setLoading(true);
     const res = await fetch("https://paintmee.herokuapp.com", {
       method: "DELETE",
     });
@@ -233,7 +233,7 @@ function App() {
     } else {
       res.status === 405 && alert("Error deleting images.");
     }
-    setLoader(false);
+    setLoading(false);
   };
 
   return (
@@ -285,7 +285,7 @@ function App() {
               images={images}
               loadImage={loadImage}
               deleteImage={deleteImage}
-              loader={loader}
+              loading={loading}
             />
           </div>
           <div className="col pb-5 pb-xl-0" id="colorPicker2">

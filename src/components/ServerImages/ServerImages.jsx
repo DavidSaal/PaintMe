@@ -1,15 +1,20 @@
 import React from "react";
-import Loader from "react-loader-spinner";
+import Skeleton from "react-loading-skeleton";
 
 const ServerImages = (props) => {
   return (
     <div className="card shadow-sm rounded-0 rounded-bottom mt-4 mt-md-0 mt-lg-1">
       <div className="card-header text-center fs-2">Saved Images On Server</div>
-      <div className="py-4 scrolller">
-        {props.loader ? (
-          <div className="pt-4">
-            <Loader type="Oval" color="black" height={50} width={50} />
-            <p className="pt-2">Loading..</p>
+      <div className="py-4 mb-2 scrolller">
+        {props.loading ? (
+          <div>
+            <Skeleton
+              className="border m-3 shadow-sm"
+              count={3}
+              height={140}
+              width={210}
+            />
+            <p className="pt-2 mb-0 fs-4">Loading..</p>
           </div>
         ) : props.images.length > 0 ? (
           props.images.map((image) => (
